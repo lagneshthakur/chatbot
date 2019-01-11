@@ -1,0 +1,21 @@
+.chatform{
+    height: 94vh;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #0066ff6b;
+}
+
+.footer{
+    height: 5vh;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.credit{
+    text-align: center;
+    font-size: 1.6vh;
+    font-style: italic;
+}
+

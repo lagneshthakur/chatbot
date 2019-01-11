@@ -1,0 +1,8 @@
+<div class="chatlist" #chatList>
+  <ul class="list-group">
+    <app-message-item *ngFor="let msg of messages ; let last = last" [message]="msg">
+        {{last ? scrollToBottom() : ''}}
+    </app-message-item>
+
+  </ul>
+</div>

@@ -1,0 +1,18 @@
+.chatlist{
+    height: 88vh;
+    overflow-y: auto;
+}
+
+.chatlist::-webkit-scrollbar {
+    width: 1vw;
+}
+ 
+.chatlist::-webkit-scrollbar-track {
+    background-color: #0066ff6b;
+    outline: 1px solid slategrey;
+}
+ 
+.chatlist::-webkit-scrollbar-thumb {
+    background-color: #28a745;
+    outline: 1px solid #28a745;
+}
