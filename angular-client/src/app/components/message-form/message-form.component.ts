@@ -10,10 +10,10 @@ import { ChatterBotService } from '../../services/chatterbot.service';
 export class MessageFormComponent implements OnInit {
 
   @Input('message')
-  private message: Message;
+  public message: Message;
 
   @Input('messages')
-  private messages: Message[];
+  public messages: Message[];
 
   constructor(private chatterBotService: ChatterBotService) {
   }
@@ -26,7 +26,7 @@ export class MessageFormComponent implements OnInit {
     this.messages.push(this.message);
     this.chatterBotService.getResponse(this.message.content).subscribe(res => {
       this.messages.push(
-        new Message(JSON.parse(res._body).message, 'assets/images/bot.png', JSON.parse(res._body).timestamp)
+        new Message(JSON.parse(res['_body']).message, 'assets/images/bot.png', JSON.parse(res['_body']).timestamp)
       );
     });
 

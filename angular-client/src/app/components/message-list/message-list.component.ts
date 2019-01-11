@@ -10,7 +10,7 @@ export class MessageListComponent implements OnInit  {
   @ViewChild('chatList') private chatList: ElementRef;
 
   @Input('messages')
-  private messages: Message[];
+  public messages: Message[];
 
   constructor() { }
 
