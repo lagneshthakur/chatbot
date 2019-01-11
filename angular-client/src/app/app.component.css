@@ -14,7 +14,7 @@
 }
 
 .credit{
-    text-align: center;
+    text-align: center !important;
     font-size: 1.6vh;
     font-style: italic;
 }
