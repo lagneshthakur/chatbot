@@ -8,6 +8,8 @@ import { ChatterBotService } from '../../services/chatterbot.service';
   styleUrls: ['./message-form.component.scss']
 })
 export class MessageFormComponent implements OnInit {
+  SERVER_URL: string;
+  socket: any;
 
   @Input('message')
   public message: Message;
@@ -15,22 +17,21 @@ export class MessageFormComponent implements OnInit {
   @Input('messages')
   public messages: Message[];
 
-  constructor(private chatterBotService: ChatterBotService) {
+  constructor(private chatterBotService: ChatterBotService ) {
+    const messageComp = this;
+    this.chatterBotService.getData().subscribe(event => {
+      console.log(event);
+      messageComp.messages.push(new Message(event['data'], 'assets/images/bot.png', new Date()));
+      messageComp.message = new Message('', 'assets/images/user.png');
+    });
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
   public sendMessage(): void {
     this.message.timestamp = new Date();
     this.messages.push(this.message);
-    this.chatterBotService.getResponse(this.message.content).subscribe(res => {
-      this.messages.push(
-        new Message(JSON.parse(res['_body']).message, 'assets/images/bot.png', JSON.parse(res['_body']).timestamp)
-      );
-    });
-
-    this.message = new Message('', 'assets/images/user.png');
+    this.chatterBotService.pushData(this.message);
   }
-
 }

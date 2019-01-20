@@ -5,16 +5,20 @@ import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ChatterBotService {
+  SERVER_URL: string;
+  socket: any;
+  observable: Observable<string>;
+  constructor(private http: Http) {
+    this.SERVER_URL = 'ws://localhost:9000';
+    this.socket = new WebSocket(this.SERVER_URL);
+  }
 
-  private baseURL = 'https://api.dialogflow.com/v1/query?v=20150910';
-  private configUrl = 'assets/config.json';
-  constructor(private http: Http) {}
-
-  public getResponse(query: string) {
-    const data = {
-      query : query,
-      lang: 'en',
-    };
-    return this.http.get(this.configUrl);
+  getData(): Observable<string> {
+    return  this.observable = new Observable((observer) => {
+      this.socket.addEventListener('message', (data) => observer.next(data));
+    });
+  }
+  pushData(message) {
+    this.socket.send(message.content);
   }
 }
